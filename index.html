@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    :root{
+      --Lime: hsl(61, 70%, 52%);
+--Red: hsl(4, 69%, 50%);
+
+--White: hsl(0, 0%, 100%);
+--Slate100: hsl(202, 86%, 94%);
+--Slate300: hsl(203, 41%, 72%);
+--Slate500: hsl(200, 26%, 54%);
+--Slate700: hsl(200, 24%, 40%);
+--Slate900: hsl(202, 55%, 16%);
+
+    }
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    @font-face {
+      font-family: "Plus Jakarta Sans";
+      src: url(./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf);
+    }
+    body{
+      font-family: "Plus Jakarta Sans";
+      background-color: var(--Slate100);
+      display:flex;
+      height:100vh;
+      align-items: center;
+      justify-content: center;
+    }
+.container{
+  background-color: var(--White);
+  width:80%;
+  border-radius: 10px;
+}
+.header{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.row{
+  display:flex;
+}
+#clear-all{
+  text-decoration: underline;
+}
+.col1{
+  padding:40px;
+}
+.col1 h1{
+ 
+  color: var(--Slate900);
+}
+label{
+  color: var(--Slate700);
+
+}
+.col1,.col2{
+  width:50%;
+}
+
+.mortgage-amt{
+  display:flex;
+  border: 1px solid var(--Slate500);
+  /* padding:15px; */
+  margin-top: 10px;
+  border-radius: 6px;
+}
+input[type="number"]{
+  border: none;
+  outline: none;
+  padding:15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--Slate700);
+  width:100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-pound{
+  background-color: var(--Slate100);
+  padding: 15px 20px;
+  display: flex;
+  border-radius: 6px 0 0 6px;
+  justify-content: center;
+  align-items: center;
+  color: var(--Slate700);
+  font-weight: 700;
+}
+.form-group{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.row-form{
+  display:flex;
+  gap: 20px;
+}
+.input-term{
+  
+  border-radius:  0 6px 6px 0 ;
+}
+.radio-container{
+  border: 1px solid var(--Slate500);
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  margin-top: 10px;
+  gap: 10px;
+}
+button{
+  padding: 15px 20px;
+  display: flex;
+  gap: 10px;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  outline: none;
+  border: none;
+  color: var(--Slate900);
+  font-weight: 700;
+  background-color: var(--Lime);
+  font-size: 15px;
+  cursor: pointer;
+}
+.col2{
+  background-color: var(--Slate900);
+  border-radius: 0 25px 25px 60px;
+  display: flex;
+
+}
+.center{
+  padding:40px;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.center h2{
+  color: var(--White);
+  margin: 20px 0 15px 0;
+}
+.center p{
+  color: var(--Slate500);
+}
+input[type="radio"]{
+
+  appearance: none ;
+  width:10px;
+  height: 10px;
+  border-radius: 50%;
+  outline: 2px solid var(--Slate900);
+  outline-offset: 3px;
+}
+input[type=radio]:checked {
+    background-color: var(--Lime); 
+    outline: 2px solid var(--Lime);
+}
+
+.mortgage-amt:hover{
+  border:1px solid var(--Lime);
+& .input-pound{
+  background-color: var(--Lime);
+}
+
+}
+.result{
+  padding:40px;
+}
+.result h2{
+  color: var(--White);
+  margin-bottom: 20px;
+}
+.result p{
+  color: var(--Slate500);
+  line-height: 22px;
+}
+
+.repay-container{
+  margin-top:30px;
+  background-color: hsl(200, 20%, 9%);
+  border-radius: 6px;
+  border-top: 4px solid var(--Lime);
+  padding:30px;
+}
+.monthly-repayment{
+ 
+padding-bottom: 30px;
+  border-bottom:1px solid var(--Slate700);
+}
+.monthly-repayment h3{
+  font-size: 52px;
+  margin-top: 5px;
+  color: var(--Lime);
+}
+.total-repay{
+margin-top: 30px;
+}
+.total-repay h3{
+  margin-top: 10px;
+  font-size: 24px;
+  color: var(--White);
+}
+.hidden-error{
+  display:none;
+}
+@media only screen and (max-width:600px){
+  .row{
+    flex-direction: column;
+  }
+  .col1,.col2{
+    width:100%;
+  }
+  .container{
+    width:100%;
+  }
+  body{
+    display:unset
+  }
+  .row-form{
+    flex-direction: column;
+  }
+  .header{
+    display:unset
+  }
+  .header h1{
+    margin-bottom: 10px;
+  }
+  .col2{
+    border-radius: 0;
+  }
+}
+    </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col1">
+        <div class="header">
+          <h1>Mortgage Calculator</h1>
+          <span id="clear-all" style="cursor: pointer;">Clear All</span>
+
+        </div>
+        <div class="form-group">
+          <label for="mortgage-amount">Mortgage Amount</label>
+          <div class="mortgage-amt amt">
+            <span class="input-pound sp-pound">£</span>
+            <input type="number" name="amount" id="mortgage-amount">
+          </div>
+          <p class="hidden-error" id="amt-error" style="color: var(--Red);margin-top: 10px;">This field is required</p>
+        </div>
+        <div class="form-group">
+          <div class="row-form">
+            <div class="col-term">
+        
+            <label for="mortgage-term">Mortgage Term</label>
+            <div class="mortgage-amt term">
+            
+              <input type="number" name="term" id="mortgage-term">
+              <span class="input-pound input-term sp-year">years</span>
+            </div>
+            <p class="hidden-error" id="term-error" style="color: var(--Red);margin-top: 10px;">This field is required</p>
+   
+              </div>
+              <div class="col-term">
+      
+              <label for="interest-rate"> Interest Rate</label>
+              <div class="mortgage-amt rate">
+              
+                <input type="number" name="rate" id="interest-rate">
+                <span class="input-pound input-term sp-rate">%</span>
+              </div>
+              <p class="hidden-error" id="rate-error" style="color: var(--Red);margin-top: 10px;">This field is required</p>
+   
+            </div>  
+        
+        </div>    </div>
+        
+        <div class="form-group">
+          <label for="mortgage">Mortgage Type</label>
+          <div class="radio-container">
+            <input type="radio" name="mortgage-type" class="radio" value="repayment"> 
+            <span> Repayment</span>
+          </div>
+          <div class="radio-container">
+            <input type="radio" name="mortgage-type" class="radio" value="interest">
+            <span> Interest Only</span>
+          </div>
+          <p class="hidden-error" id="type-error" style="color: var(--Red);margin-top: 10px;">This field is required</p>
+   
+        </div>
+        <button> <img src="./assets/images/icon-calculator.svg" alt="">Calculate Repayments</button>
+  
+
+ 
+
+  
+  
+  
+
+  
+      </div>
+      <div class="col2">
+<div class="center">
+  <img src="./assets/images/illustration-empty.svg" alt="">
+  <h2>Results shown here</h2>
+
+  <p>  Complete the form and click “calculate repayments” to see what 
+    your monthly repayments would be.</p>
+</div>
+<div class="result" style="display:none">
+  <h2>Your results</h2>
+
+ <p> Your results are shown below based on the information you provided. 
+  To adjust the results, edit the form and click “calculate repayments” again.
+</p>
+<div class="repay-container">
+<div class="monthly-repayment">
+    <p>Your monthly repayments</p>
+    <h3 id="monthly-rep">£17,232</h3>
+</div>
+<div class="total-repay">
+  <p> Total you'll repay over the term </p>
+  <h3 id="total-rep">£546743</h3>
+</div>
+</div>
+
+
+ 
+</div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <!-- Empty results start -->
+
+
+  <!-- Empty results end -->
+
+  <!-- Completed results start -->
+
+
+
+  <!-- Completed results end -->
+  
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
+  <script>
+    $(".radio-container").click(function(){
+    
+  $(".radio-container").css({"background":"none"})
+  $(this).find('input[type="radio"]').prop('checked', true);
+  $(this).css({"border":"1px solid hsl(61, 70%, 52%)","background":"rgb(255 255 234)"})
+})
+
+$("button").click(function(){
+  $(".hidden-error").hide();
+  $(".mortgage-amt").css({"border":"1px solid hsl(203, 41%, 72%)"});
+  $(".input-pound").css({"background":"hsl(202, 86%, 94%)","color":"hsl(200, 24%, 40%)"})
+    
+
+  let amt = $("#mortgage-amount").val();
+  let year = $("#mortgage-term").val();
+  let rate = $("#interest-rate").val() / 100;
+  // alert(rate)
+  let type = $("input[name='mortgage-type']:checked").val();
+  if(!amt){
+    $(".amt").css({"border":"1px solid hsl(4, 69%, 50%)"});
+    $(".sp-pound").css({"background":"hsl(4, 69%, 50%)","color":"white"})
+    $("#amt-error").show();
+  }
+  if(!year){
+    $(".term").css({"border":"1px solid hsl(4, 69%, 50%)"});
+    $(".sp-year").css({"background":"hsl(4, 69%, 50%)","color":"white"})
+    $("#term-error").show();
+  }
+  if(!rate){
+    $(".rate").css({"border":"1px solid hsl(4, 69%, 50%)"});
+    $(".sp-rate").css({"background":"hsl(4, 69%, 50%)","color":"white"})
+    $("#rate-error").show();
+  }
+  if(!type){
+    $("#type-error").show();
+  }
+
+  if(amt && year && rate && type){
+    $(".center").css({"display":"none"});
+    $(".result").show();
+    var monthly_rate = rate/12;
+    var n = year * 12;
+    var result_monthly;
+    var result_total;
+    if(type == "interest"){
+      
+      result_monthly = ((amt * year * rate));
+      var y = Number(year)*12;
+      //alert(result_monthly)
+      result_monthly = Number(result_monthly)/y;
+      result_total = (amt * year * rate);
+      result_total = Number(result_total)+Number(amt);
+      
+      $("#monthly-rep").text("£"+ (result_monthly.toFixed(2)));
+      $("#total-rep").text("£"+ result_total.toFixed(2));
+
+    }else{
+    
+    
+      result_total = (amt* monthly_rate )/ (1- Math.pow(1+ monthly_rate,-n)) * n;
+      result_monthly = result_total / n;
+
+      $("#monthly-rep").text("£"+ result_monthly.toFixed(2));
+      $("#total-rep").text("£"+ result_total.toFixed(2));
+
+    }
+  }
+
+})
+
+
+
+$("#clear-all").click(function(){
+  location.reload();
+})
+  </script>
+
+</body>
+</html>
